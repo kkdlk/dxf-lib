@@ -1,12 +1,12 @@
 package cn.kkdlk.generate.dxf.model;
 
 import cn.kkdlk.generate.dxf.enums.LineWidthEnum;
+import cn.kkdlk.generate.dxf.model.entities.Color;
 import cn.kkdlk.generate.dxf.utils.DxfLineBuilder;
 import cn.kkdlk.generate.dxf.utils.DxfUtil;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.awt.*;
 
 /**
  * @Author ytzjj

@@ -35,7 +35,7 @@ public enum TextEnum {
      * 文字旋转角度
      */
     ANGLE("50", "文字旋转角度"),
-     /**
+    /**
      * 文字倾斜角度
      */
     INCLINATION("51", "文字倾斜角度"),

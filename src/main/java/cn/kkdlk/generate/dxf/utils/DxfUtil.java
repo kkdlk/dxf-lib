@@ -1,6 +1,7 @@
 package cn.kkdlk.generate.dxf.utils;
 
-import java.awt.*;
+import cn.kkdlk.generate.dxf.model.entities.Color;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Objects;
@@ -71,11 +72,11 @@ public class DxfUtil {
      */
     public static String convertToHtmlColor(int colorValue) {
         // 将整数值转为16进制字符串
-        String hexString = Integer.toHexString(colorValue);
+        StringBuilder hexString = new StringBuilder(Integer.toHexString(colorValue));
 
         // 补足到6位
         while (hexString.length() < 6) {
-            hexString = "0" + hexString;
+            hexString.insert(0, "0");
         }
 
         // 提取透明度和颜色值的部分

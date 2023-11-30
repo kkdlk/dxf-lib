@@ -6,12 +6,12 @@ import cn.kkdlk.generate.dxf.model.entities.*;
 import cn.kkdlk.generate.dxf.utils.DxfUtil;
 import cn.kkdlk.generate.dxf.utils.StreamUtil;
 import cn.kkdlk.generate.dxf.utils.StringUtil;
-import lombok.extern.log4j.Log4j;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Dxf处理类，支持向矿图中添加自定义图形，目前支持的图形有圆形Circle，圆弧Arc，直线Line，多线段LwPolyLine，文字Text
@@ -30,8 +30,8 @@ import java.util.*;
  *
  * @author wangp
  */
-@Log4j
 public class DxfDocWriter implements Closeable {
+
     /**
      * 当选择保存为dxf文件的时候，要保留的Entities类型的数组，不在数组中的对象将会被忽略掉（不包含自定义加入的图元）
      */
@@ -40,10 +40,11 @@ public class DxfDocWriter implements Closeable {
      * 空的DXF文件模板路径
      */
     public static final String DEFAULT_EMPTY_DXF_PATH = "dxf/empty.dxf";
+    private static final Logger log = Logger.getLogger(DxfDocWriter.class.getName());
     private List<String> entityNoReducePart = Arrays.asList(DEFAULT_ENTITY_NO_REDUCE_PART);
-    private List<DxfEntity> newDxfEntityList;
+    private final List<DxfEntity> newDxfEntityList;
     private long maxMeta;
-    private Charset charset;
+    private final Charset charset;
 
     private BufferedReader br;
     private File dxfFile;
@@ -72,7 +73,7 @@ public class DxfDocWriter implements Closeable {
             try {
                 this.br = StreamUtil.getFileReader(dxfFile.getAbsolutePath(), charset);
             } catch (FileNotFoundException e) {
-                log.error("file " + dxfFilePath + "not exists", e);
+                log.severe("file " + dxfFilePath + "not exists");
             }
             maxMeta = DxfUtil.readMaxMeta(dxfFilePath);
         } else {
@@ -97,13 +98,13 @@ public class DxfDocWriter implements Closeable {
     public void addEntity(DxfEntity dxfEntity) {
         if (dxfEntity instanceof DxfRay) {
             if (Vector3.ZERO.equals(((DxfRay) dxfEntity).getDirection())) {
-                log.error(dxfEntity.getEntityName() + " direction cant be zero!!, will ignore this entity");
+                log.severe(dxfEntity.getEntityName() + " direction cant be zero!!, will ignore this entity");
                 return;
             }
         }
         if (dxfEntity instanceof DxfLwPolyLine) {
             if (((DxfLwPolyLine) dxfEntity).isEmpty()) {
-                log.warn("LwPolyLine not contains any point, will ignore this entity");
+                log.warning("LwPolyLine not contains any point, will ignore this entity");
                 return;
             }
         }
@@ -218,15 +219,15 @@ public class DxfDocWriter implements Closeable {
                 }
             }
         } catch (Exception e) {
-            log.error("Reduce dxf fail!!!!!!", e);
+            log.severe("Reduce dxf fail!!!!!!" + e.getMessage());
         } finally {
             try {
                 if (dxfFile != null) {
-                    if (br!=null) {
+                    if (br != null) {
                         br.reset();
                     }
                 } else {
-                    if (br!=null) {
+                    if (br != null) {
                         br.close();
                     }
                 }
@@ -242,7 +243,7 @@ public class DxfDocWriter implements Closeable {
             read(justSaveEntity, containNewEntity, fileWriter::write);
             fileWriter.flush();
         } catch (IOException e) {
-            log.error("save fail", e);
+            log.severe("save fail" + e.getMessage());
         }
 
     }

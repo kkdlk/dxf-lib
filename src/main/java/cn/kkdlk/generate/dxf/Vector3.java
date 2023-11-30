@@ -1,13 +1,11 @@
 package cn.kkdlk.generate.dxf;
 
 import lombok.*;
-import org.checkerframework.framework.qual.QualifierArgument;
 
 import java.math.BigDecimal;
 
 /**
  * 三维矢量对象
- *
  */
 @Data
 @AllArgsConstructor

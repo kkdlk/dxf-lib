@@ -12,7 +12,7 @@ public class TransformBuilder {
     /**
      * 容器
      */
-    private Map<String, GeometricTransform> map;
+    private final Map<String, GeometricTransform> map;
 
     public TransformBuilder() {
         map = new HashMap<>();

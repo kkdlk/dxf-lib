@@ -9,7 +9,7 @@ package cn.kkdlk.generate.dxf.utils;
 public class DxfLineBuilder {
 
 
-    private StringBuilder lineBuilder;
+    private final StringBuilder lineBuilder;
 
     private DxfLineBuilder() {
         this.lineBuilder = new StringBuilder();

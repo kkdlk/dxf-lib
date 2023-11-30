@@ -36,7 +36,7 @@ public class MTextStyleParse {
     static {
         try (
                 InputStream resourceStream = StreamUtil.getResourceStream(DEFAULT_COLOR_JSON_FILE_PATH);
-                JSONReader reader = new JSONReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8));
+                JSONReader reader = new JSONReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8))
         ) {
             colorReflection = reader.readObject(JSONArray.class);
         } catch (IOException e) {

@@ -277,8 +277,7 @@ public class DxfEntitiesParse {
                 str = lineList.get(++i);
                 vertexNum = Integer.parseInt(str.trim());
                 polyLine.setVertexNum(vertexNum);
-            }
-            else if (PolyLineEnum.COORDINATE_X.getCode().equals(str)) {
+            } else if (PolyLineEnum.COORDINATE_X.getCode().equals(str)) {
                 for (int j = 0; j < vertexNum; j++) {
                     GeometricVertex vertex = new GeometricVertex();
                     //顶点的x坐标

@@ -28,12 +28,12 @@ public class DxfResolverImpl implements DxfResolver {
     /**
      * dxf 文件流
      */
-    private InputStream inputStream;
+    private final InputStream inputStream;
 
     /**
      * dxf 编码
      */
-    private String fileChartSet = "UTF-8";
+    private final String fileChartSet = "UTF-8";
 
     /**
      * dxf 文件头信息

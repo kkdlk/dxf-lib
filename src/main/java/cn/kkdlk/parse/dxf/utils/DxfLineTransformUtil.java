@@ -16,7 +16,7 @@ public class DxfLineTransformUtil {
     /**
      * 具体的进行转换的实现类
      */
-    private static DxfLineTransformation transformation = new DxfLineTransformationImpl();
+    private static final DxfLineTransformation transformation = new DxfLineTransformationImpl();
 
     /**
      * 几何数据转换为点线数据

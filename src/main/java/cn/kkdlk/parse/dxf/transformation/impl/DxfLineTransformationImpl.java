@@ -268,6 +268,7 @@ public class DxfLineTransformationImpl implements DxfLineTransformation {
 
     /**
      * 将几何
+     *
      * @param list 需要转换的数据
      * @return
      */

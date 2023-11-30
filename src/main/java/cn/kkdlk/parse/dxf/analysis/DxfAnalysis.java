@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,7 @@ public class DxfAnalysis {
          * 从cad版本信息中获取字符编码
          */
         CadVersionEnum cadVersionEnum = CadVersionEnum.getCadVersion(dxfHeaderModel.getCadVersion());
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             Map<String, List<GeometricModel>> map = new HashMap<>();
             //读取dxf所有的数据
             List<String> lineList = readAllLine(reader);
